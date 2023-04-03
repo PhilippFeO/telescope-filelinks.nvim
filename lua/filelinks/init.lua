@@ -11,7 +11,7 @@ local defaults = {
   format_string = "[%s](%s)",
   prompt_title = "File Finder",
   remove_extension = true,
-  wiki_dir = "~/wiki.vim", -- used by <finders.new_oneshot_job> (I guess)
+  wiki_dir = "~/wiki.vim",
 }
 
 local M = {}
@@ -19,7 +19,8 @@ local M = {}
 M.opts = {}
 
 M.setup = function(opts)
-  -- `cwd` not `wiki_dir` because telescope's logic needs the `cwd` field.
+  -- `cwd` not `wiki_dir` because telescope's finders.new_oneshot_job
+  -- logic needs the `cwd` field.
   M.opts.cwd = opts.wiki_dir or defaults.wiki_dir
   M.opts.find_command = opts.find_command or defaults.find_command
   M.opts.first_upper = opts.first_upper or defaults.first_upper
@@ -30,7 +31,7 @@ end
 M.make_filelink = function()
   -- copy paste from ~/.local/share/nvim/lazy/telescope.nvim/lua/telescope/builtin/__files.lua -> files.find_files = …
   pickers.new(M.opts, {
-    prompt_title = defaults.prompt_title,
+    prompt_title = M.opts.prompt_title,
     finder = finders.new_oneshot_job(defaults.find_command, M.opts),
     sorter = conf.generic_sorter(M.opts),
     -- enable preview pane
