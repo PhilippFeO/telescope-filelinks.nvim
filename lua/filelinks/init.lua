@@ -8,12 +8,11 @@ local action_state = require "telescope.actions.state"
 -- Dafault values
 local defaults = {
   -- find_command = { "rg", "--files", "--color", "never" },
-  find_command = "",
   first_upper = true,
   format_string = "[%s](%s)",
   prompt_title = "File Finder",
   remove_extension = true,
-  wiki_dir = "~/wiki.vim/",
+  working_dir = vim.fn.getcwd(),
 }
 
 local M = {}
@@ -21,9 +20,9 @@ local M = {}
 M.opts = {}
 
 M.setup = function(opts)
-  -- `cwd` not `wiki_dir` because telescope's finders.new_oneshot_job
+  -- `cwd` not `working_dir` because telescope's finders.new_oneshot_job
   -- logic needs the `cwd` field.
-  M.opts.cwd = opts.wiki_dir or defaults.wiki_dir
+  M.opts.working_dir = opts.working_dir or defaults.working_dir
   -- M.opts.find_command = opts.find_command or defaults.find_command
   M.opts.first_upper = opts.first_upper or defaults.first_upper
   M.opts.format_string = opts.format_string or defaults.format_string
@@ -31,11 +30,12 @@ M.setup = function(opts)
   M.opts.remove_extension = opts.remove_extension or defaults.remove_extension
 end
 
-M.make_filelink = function()
+M.make_filelink = function(opts)
   -- In case `make_filelink` is called without an argument
+  opts = opts or {}
   builtin.find_files({
     prompt_title = M.opts.prompt_title,
-    cwd = M.opts.cwd,
+    cwd = opts.working_dir or M.opts.working_dir,
     -- find_command = M.opts.find_command,
     attach_mappings = function(prompt_bufnr, _)
       actions.select_default:replace(function()
