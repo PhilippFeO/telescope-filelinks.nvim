@@ -10,7 +10,6 @@ a telescope file picker opens an lets you choose the file you want to link. Afte
 
 ## Installation
 ### Lazy.nvim
-Just include
 ```lua
 'PhilippFeO/telescope-filelinks.nvim'
 ```
