@@ -29,6 +29,7 @@ M.make_filelink = function(opts)
   -- In case `make_filelink` is called without an argument
   opts = opts or {}
   local format_string = opts.format_string or defaults.format_string
+  format_string = format_string .. " " -- insert space after link because typography
   builtin.find_files({
     prompt_title = defaults.prompt_title,
     cwd = opts.working_dir or defaults.working_dir,
