@@ -1,7 +1,4 @@
 local builtin = require "telescope.builtin"
--- local pickers = require "telescope.pickers"
--- local finders = require "telescope.finders"
--- local conf = require("telescope.config").values
 local actions = require "telescope.actions"
 local action_state = require "telescope.actions.state"
 
@@ -17,26 +14,24 @@ local defaults = {
 
 local M = {}
 
-M.opts = {}
-
 M.setup = function(opts)
   -- `cwd` not `working_dir` because telescope's finders.new_oneshot_job
   -- logic needs the `cwd` field.
-  M.opts.working_dir = opts.working_dir or defaults.working_dir
-  -- M.opts.find_command = opts.find_command or defaults.find_command
-  M.opts.first_upper = opts.first_upper or defaults.first_upper
-  M.opts.format_string = opts.format_string or defaults.format_string
-  M.opts.prompt_title = opts.prompt_title or defaults.prompt_title
-  M.opts.remove_extension = opts.remove_extension or defaults.remove_extension
+  defaults.working_dir = opts.working_dir or defaults.working_dir
+  -- defaults.find_command = opts.find_command or defaults.find_command
+  defaults.first_upper = opts.first_upper or defaults.first_upper
+  defaults.format_string = opts.format_string or defaults.format_string
+  defaults.prompt_title = opts.prompt_title or defaults.prompt_title
+  defaults.remove_extension = opts.remove_extension or defaults.remove_extension
 end
 
 M.make_filelink = function(opts)
   -- In case `make_filelink` is called without an argument
   opts = opts or {}
   builtin.find_files({
-    prompt_title = M.opts.prompt_title,
-    cwd = opts.working_dir or M.opts.working_dir,
-    -- find_command = M.opts.find_command,
+    prompt_title = defaults.prompt_title,
+    cwd = opts.working_dir or defaults.working_dir,
+    -- find_command = defaults.find_command,
     attach_mappings = function(prompt_bufnr, _)
       actions.select_default:replace(function()
         actions.close(prompt_bufnr)
@@ -44,15 +39,15 @@ M.make_filelink = function(opts)
         -- Extract file name via removing everthing before last /
         local file_name = selection[1]:gsub(".*/", "")
         -- remove file extension
-        if M.opts.remove_extension then
+        if defaults.remove_extension then
           file_name = file_name:gsub("%..*", "")
         end
         -- convert first letter to uppercase for proper readability
-        if M.opts.first_upper then
+        if defaults.first_upper then
           file_name = file_name:gsub("^%l", string.upper)
         end
         -- Put <file_name> & <selection> at current position (=nvim_put)
-        vim.api.nvim_put({ string.format(M.opts.format_string, file_name, selection[1]) }, "", false, true)
+        vim.api.nvim_put({ string.format(defaults.format_string, file_name, selection[1]) }, "", false, true)
       end)
       return true
     end,
