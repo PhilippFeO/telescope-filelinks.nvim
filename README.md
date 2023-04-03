@@ -8,9 +8,16 @@ By using the function `make_filelink` via
 ```
 a telescope file picker opens an lets you choose the file you want to link. After hitting `<CR>` a string according to `format_string` (default is `[%s](%s)` for `md` files) is added to your document, for example: The file `~/wiki/nvim/plugins.md` becomes `[Plugins](~/wiki/nvim/plugins.md)`.
 
-<!-- TODO: Section 'Installation', compare https://github.com/debugloop/telescope-undo.nvim#installation <03-04-2023> -->
 ## Installation
-TODO, I'm sorry.
+### Lazy.nvim
+Just include
+```lua
+'PhilippFeO/telescope-filelinks.nvim'
+```
+### packer
+```lua
+use { 'PhilippFeO/telescope-filelinks.nvim' }
+```
 
 ## Setup
 ```lua
