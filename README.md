@@ -22,7 +22,7 @@ filelinks.setup({
 ```
 It probably makes sense to create a keybinding, for instance
 ```lua
-vim.keymap.set('n', '<Leader>ml', filelinks.make_file_link, { desc = '[m]ake file [l]ink' })
+vim.keymap.set('n', '<Leader>ml', filelinks.make_filelink, { desc = '[m]ake file [l]ink' })
 ```
 
 ### Options
