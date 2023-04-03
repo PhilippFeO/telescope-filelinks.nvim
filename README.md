@@ -1,12 +1,12 @@
 # telescope-filelinks.nvim
-Add file links to your (N)Vim Wiki or README.md using telescope.
+Add file links to your (N)Vim Wiki using telescope.
 
 ## Usage
 By using the function `make_filelink` via
 ```vim
 :Telescope filelinks make_filelink
 ```
-a telescope file picker opens an lets you choose the file you want to link. After hitting `<CR>` a string according to `format_string` (default is `[%s](%s)` for `md` files) is added to your document, for example: The file `~/wiki/nvim/plugins.md` becomes `[Plugins](~/wiki/nvim/plugins.md)`.
+a telescope file picker opens an lets you choose the file you want to link. After hitting `<CR>` a string according to `format_string` (default is `"[%s](%s)"` for `md` files) is added to your document, for example: The file `~/wiki/nvim/plugins.md` becomes `[Plugins](~/wiki/nvim/plugins.md)`.
 
 ## Installation
 ### Lazy.nvim
