@@ -25,6 +25,7 @@ M.setup = function(opts)
   M.opts.find_command = opts.find_command or defaults.find_command
   M.opts.first_upper = opts.first_upper or defaults.first_upper
   M.opts.format_string = opts.format_string or defaults.format_string
+  M.opts.prompt_title = opts.prompt_title or defaults.prompt_title
   M.opts.remove_extension = opts.remove_extension or defaults.remove_extension
 end
 
