@@ -28,6 +28,7 @@ end
 M.make_filelink = function(opts)
   -- In case `make_filelink` is called without an argument
   opts = opts or {}
+  local format_string = opts.format_string or defaults.format_string
   builtin.find_files({
     prompt_title = defaults.prompt_title,
     cwd = opts.working_dir or defaults.working_dir,
@@ -47,7 +48,7 @@ M.make_filelink = function(opts)
           file_name = file_name:gsub("^%l", string.upper)
         end
         -- Put <file_name> & <selection> at current position (=nvim_put)
-        vim.api.nvim_put({ string.format(defaults.format_string, file_name, selection[1]) }, "", false, true)
+        vim.api.nvim_put({ string.format(format_string, file_name, selection[1]) }, "", false, true)
       end)
       return true
     end,
