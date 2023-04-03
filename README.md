@@ -1,5 +1,5 @@
 # telescope-filelinks.nvim
-Add file links to your (N)Vim Wiki using telescope.
+Add file links to your (N)Vim wiki or files (like a `README.md`) in general using telescope.
 
 ## Usage
 By using the function `make_filelink` via
@@ -34,11 +34,9 @@ vim.keymap.set('n', '<Leader>ml', filelinks.make_filelink, { desc = '[m]ake file
 ### Options
 The following options (with their defaults) are currently availabe:
 ```lua
--- You current wiki directory. I strongly recommend to set this option.
-wiki_dir = '~/wiki.vim',
--- Command to use for searching files (copied from telescope's `find_files`,
--- so it should work out of the box)
-find_command = { 'rg', '--files', '--color', 'never' },
+-- The working directory to search for files.
+-- Set to your wiki directory to create links (further examples below)
+working_dir = vim.fn.getcwd(),
 -- First letter in display name upper or lower case, i.e. `[Plugins](…)`
 -- or `[plugins](…)`
 first_upper = true,
@@ -54,10 +52,27 @@ prompt_title = 'File Finder',
 -- or `[Plugins.lua](…)`
 remove_extension = true,
 ```
-#### Example configuration
+
+#### Options for `make_filelink`
+The function `make_filelink` takes an `opts` table where you can (but don't have to) specify `working_dir` and `format_string` (the meaning is the same as in [Options](#options)). The goal behind this is to be able to use `make_filelink` in additional contexts next to linking files in a wiki, s. [Usecase besides in wiki contexts](#usecase-besides-in-wiki-contexts).
+
+# Examples
+## Configuration
 ```lua
 filelinks.setup({
-    wiki_dir = '~/Documents/wiki'
+    working_dir = '~/Documents/wiki'
     prompt_title = 'Markdown File Finder' 
 })
 ```
+
+## Usecase besides in wiki contexts
+You can use the picker to create links in any other directory. For this purpose leave the `working_dir` unchanged. An example usecase where this might be useful is the following: You have set up `telescope-filelinks.nvim` for your wiki with the keymap shown above. Because you are a highly productive open source developer, you write regularly to `md` files like a `README.md`. With the following keymap
+```lua
+vim.keymap.set('n', '<Leader>mc', function()
+  filelinks.make_filelink({
+    working_dir = vim.fn.getcwd(),
+    format_string = '[%s](%s)'
+  })
+end, { desc = '[m]ake link in [c]urrent dir' })
+```
+you can easily add file links to the `README.md` although you might have defined another format string for your wiki.
