@@ -46,6 +46,8 @@ first_upper = true,
 -- `%s`. Currently, no checks for a proper Lua regex are performed, so
 -- keep an eye on having exactly two `%s` and nothing else/more.
 format_string = '[%s](%s)', 
+-- Append space to format_string for better typography and continuous typing
+format_string_append = " ",
 -- Title for the telescope prompt
 prompt_title = 'File Finder',
 -- Display file links with or without extension, f. i. `[Plugins](…)`

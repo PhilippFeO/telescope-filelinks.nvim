@@ -7,6 +7,7 @@ local defaults = {
   -- find_command = { "rg", "--files", "--color", "never" },
   first_upper = true,
   format_string = "[%s](%s)",
+  format_string_append = " ", -- append space due to typography and continuous typing
   prompt_title = "File Finder",
   remove_extension = true,
   working_dir = vim.fn.getcwd(),
@@ -21,6 +22,7 @@ M.setup = function(opts)
   -- defaults.find_command = opts.find_command or defaults.find_command
   defaults.first_upper = opts.first_upper or defaults.first_upper
   defaults.format_string = opts.format_string or defaults.format_string
+  defaults.format_string_append = opts.format_string or defaults.format_string_append
   defaults.prompt_title = opts.prompt_title or defaults.prompt_title
   defaults.remove_extension = opts.remove_extension or defaults.remove_extension
 end
@@ -29,7 +31,7 @@ M.make_filelink = function(opts)
   -- In case `make_filelink` is called without an argument
   opts = opts or {}
   local format_string = opts.format_string or defaults.format_string
-  format_string = format_string .. " " -- insert space after link because typography
+  format_string = format_string .. defaults.format_string_append -- insert space after link because typography
   builtin.find_files({
     prompt_title = defaults.prompt_title,
     cwd = opts.working_dir or defaults.working_dir,
