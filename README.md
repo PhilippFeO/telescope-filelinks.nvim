@@ -28,6 +28,9 @@ filelinks.setup({
 ```
 It probably makes sense to create a keybinding, for instance
 ```lua
+-- insert mode for writing continuously
+vim.keymap.set('i', '<C-l>', filelinks.make_filelink, { desc = '[<C>]reate [l]ink in Insert Mode' })
+-- normal mode
 vim.keymap.set('n', '<Leader>ml', filelinks.make_filelink, { desc = '[m]ake file [l]ink' })
 ```
 
@@ -56,7 +59,7 @@ remove_extension = true,
 ```
 
 #### Options for `make_filelink`
-The function `make_filelink` takes a table as input where you can overwrite the default values. This might be useful when you want to use the plugin in additional contexts, for instance for writing `README.md` files, s. [Usecase besides in wiki contexts](#usecase-besides-in-wiki-contexts).
+The function `make_filelink` takes a table as input where you can overwrite the default values. This might be useful when you want to use the plugin in additional contexts, for instance for writing `README.md` files, s. [Usecase besides wiki contexts](#usecase-besides-wiki-contexts).
 
 # Examples
 ## Configuration
@@ -67,7 +70,7 @@ filelinks.setup({
 })
 ```
 
-## Usecase besides in wiki contexts
+## Usecase besides wiki contexts
 You can use the picker to create links in any other directory. For this purpose leave the `working_dir` unchanged. An example usecase where this might be useful is the following: You have set up `telescope-filelinks.nvim` for your wiki with the keymap shown above. Because you are a highly productive open source developer, you write regularly to `md` files like a `README.md`. With the following keymap
 ```lua
 vim.keymap.set('n', '<Leader>mc', function()
