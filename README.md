@@ -56,7 +56,7 @@ remove_extension = true,
 ```
 
 #### Options for `make_filelink`
-The function `make_filelink` takes an `opts` table where you can (but don't have to) specify `working_dir` and `format_string` (the meaning is the same as in [Options](#options)). The goal behind this is to be able to use `make_filelink` in additional contexts next to linking files in a wiki, s. [Usecase besides in wiki contexts](#usecase-besides-in-wiki-contexts).
+The function `make_filelink` takes a table as input where you can overwrite the default values. This might be useful when you want to use the plugin in additional contexts, for instance for writing `README.md` files, s. [Usecase besides in wiki contexts](#usecase-besides-in-wiki-contexts).
 
 # Examples
 ## Configuration
@@ -73,8 +73,9 @@ You can use the picker to create links in any other directory. For this purpose 
 vim.keymap.set('n', '<Leader>mc', function()
   filelinks.make_filelink({
     working_dir = vim.fn.getcwd(),
-    format_string = '[%s](%s)'
+    format_string = '[%s](%s)',
+    remove_extension = false
   })
 end, { desc = '[m]ake link in [c]urrent dir' })
 ```
-you can easily add file links to the `README.md` although you might have defined another format string for your wiki.
+you can easily add file links to the `README.md` although you might have defined another format string for your wiki in the `setup` function.
