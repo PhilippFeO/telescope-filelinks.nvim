@@ -6,7 +6,9 @@ By using the function `make_filelink` via
 ```vim
 :Telescope filelinks make_filelink
 ```
-a telescope file picker opens an lets you choose the file you want to link. After hitting `<CR>` a string according to `format_string` (default is `"[%s](%s)"` for `md` files) is added to your document, for example: The file `~/wiki/nvim/plugins.md` becomes `[Plugins](~/wiki/nvim/plugins.md)`.
+a telescope file picker opens an lets you choose the file you want to link. After hitting `<CR>` a string according to `format_string` (default is `"[%s](%s)"` for `md` files) is added to your document, for example: The file `lua/filelinks/init.lua` becomes `[Init](lua/filelinks/init.lua)`.
+
+There might be scenarios, where you have to prepend `./` or `/` to the path string, i. e. using `[%s](/%s)` instead of `[%s](%s)`.
 
 ## Installation
 ### Lazy.nvim
