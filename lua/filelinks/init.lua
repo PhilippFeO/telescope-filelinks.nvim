@@ -22,7 +22,7 @@ M.setup = function(opts)
   -- defaults.find_command = opts.find_command or defaults.find_command
   defaults.first_upper = opts.first_upper or defaults.first_upper
   defaults.format_string = opts.format_string or defaults.format_string
-  defaults.format_string_append = opts.format_string or defaults.format_string_append
+  defaults.format_string_append = opts.format_string_append or defaults.format_string_append
   defaults.prompt_title = opts.prompt_title or defaults.prompt_title
   defaults.remove_extension = opts.remove_extension or defaults.remove_extension
 end
@@ -61,6 +61,7 @@ M.make_filelink = function(opts)
         end
         -- Put <file_name> & <selection> at current position (=nvim_put)
         local format_string = fopts.format_string .. fopts.format_string_append
+        print('format_string: ' .. format_string)
         vim.api.nvim_put({ string.format(format_string, file_name, selection[1]) }, "", false, true)
       end)
       return true
