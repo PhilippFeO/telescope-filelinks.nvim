@@ -1,5 +1,5 @@
 # telescope-filelinks.nvim
-Add file links to your (N)Vim wiki or files (like a `README.md`) in general using telescope.
+Add file links to your (N)Vim wiki or files in general (like a `README.md`) using telescope.
 
 ## Usage
 By using the function `make_filelink` via
