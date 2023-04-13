@@ -48,9 +48,9 @@ M.make_filelink = function(opts)
     attach_mappings = function(prompt_bufnr, _)
       actions.select_default:replace(function()
         actions.close(prompt_bufnr)
-        local selection = action_state.get_selected_entry()
+        local selected_page = action_state.get_selected_entry()
         -- Extract file name via removing everthing before last /
-        local file_name = selection[1]:gsub(".*/", "")
+        local file_name = selected_page[1]:gsub(".*/", "")
         -- remove file extension
         if fopts.remove_extension then
           file_name = file_name:gsub("%..*", "")
@@ -59,13 +59,13 @@ M.make_filelink = function(opts)
         if fopts.first_upper then
           file_name = file_name:gsub("^%l", string.upper)
         end
-        -- Put <file_name> & <selection> at current position (=nvim_put)
+        -- Put <file_name> & <selected_page> at current position (=nvim_put)
         local format_string = fopts.format_string .. fopts.format_string_append
         -- Some link schemes like Wiki, Orgmode or AsciiDoc expect the URL to come first
         if fopts.url_first then
-          vim.api.nvim_put({ string.format(format_string, selection[1], file_name) }, "", false, true)
+          vim.api.nvim_put({ string.format(format_string, selected_page[1], file_name) }, "", false, true)
         else -- Description first
-          vim.api.nvim_put({ string.format(format_string, file_name, selection[1]) }, "", false, true)
+          vim.api.nvim_put({ string.format(format_string, file_name, selected_page[1]) }, "", false, true)
         end
       end)
       return true
