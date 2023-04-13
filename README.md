@@ -61,7 +61,7 @@ remove_extension = true,
 -- Some link schemes like Wiki, Orgmode or AsciiDoc expect the URL first
 -- and the displayed text second. Markdown's order is vice versa. By
 -- setting to true URL first schemes are possible.
-url_first = true
+url_first = false
 ```
 
 #### Options for `make_filelink`
