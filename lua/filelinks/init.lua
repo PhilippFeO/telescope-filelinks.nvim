@@ -10,6 +10,7 @@ local defaults = {
   format_string_append = " ", -- append space for better typography and continuous typing
   prompt_title = "File Finder",
   remove_extension = true,
+  url_first = false,
   working_dir = vim.fn.getcwd(),
 }
 
@@ -25,6 +26,7 @@ M.setup = function(opts)
   defaults.format_string_append = opts.format_string_append or defaults.format_string_append
   defaults.prompt_title = opts.prompt_title or defaults.prompt_title
   defaults.remove_extension = opts.remove_extension or defaults.remove_extension
+  defaults.url_first = opts.url_first or defaults.url_first
 end
 
 M.make_filelink = function(opts)
@@ -61,7 +63,12 @@ M.make_filelink = function(opts)
         end
         -- Put <file_name> & <selection> at current position (=nvim_put)
         local format_string = fopts.format_string .. fopts.format_string_append
-        vim.api.nvim_put({ string.format(format_string, file_name, selection[1]) }, "", false, true)
+        -- Some link schemes like Wiki, Orgmode or AsciiDoc expect the URL to come first
+        if fopts.url_first then
+          vim.api.nvim_put({ string.format(format_string, selection[1], file_name) }, "", false, true)
+        else -- Description first
+          vim.api.nvim_put({ string.format(format_string, file_name, selection[1]) }, "", false, true)
+        end
       end)
       return true
     end,

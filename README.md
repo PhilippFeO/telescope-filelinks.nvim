@@ -58,6 +58,10 @@ prompt_title = 'File Finder',
 -- Display file links with or without extension, f. i. `[Plugins](…)`
 -- or `[Plugins.lua](…)`
 remove_extension = true,
+-- Some link schemes like Wiki, Orgmode or AsciiDoc expect the URL first
+-- and the displayed text second. Markdown's order is vice versa. By
+-- setting to true URL first schemes are possible.
+url_first = true
 ```
 
 #### Options for `make_filelink`
