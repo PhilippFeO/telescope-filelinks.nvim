@@ -33,6 +33,7 @@ M.make_filelink = function(opts)
   local fopts = {} -- fopts = function opts
   if opts then
     -- To work properly in the subset case, the missing default values have to be added..
+    -- You can't just overwrite the defaults because users might set them explicitly and rely on them.
     for k, v in pairs(defaults) do
       fopts[k] = v
     end
@@ -44,7 +45,9 @@ M.make_filelink = function(opts)
   end
   builtin.find_files({
     prompt_title = fopts.prompt_title,
-    cwd = fopts.working_dir or fopts.working_dir,
+    -- cwd not working_dir because telescope's finders.new_oneshot_job
+    -- logic needs the cwd field.
+    cwd = fopts.working_dir,
     attach_mappings = function(prompt_bufnr, _)
       actions.select_default:replace(function()
         actions.close(prompt_bufnr)
