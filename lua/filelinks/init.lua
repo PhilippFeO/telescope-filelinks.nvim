@@ -20,7 +20,6 @@ M.setup = function(opts)
   -- cwd not working_dir because telescope's finders.new_oneshot_job
   -- logic needs the cwd field.
   defaults.working_dir = opts.working_dir or defaults.working_dir
-  -- defaults.find_command = opts.find_command or defaults.find_command
   defaults.first_upper = opts.first_upper or defaults.first_upper
   defaults.format_string = opts.format_string or defaults.format_string
   defaults.format_string_append = opts.format_string_append or defaults.format_string_append
@@ -46,7 +45,6 @@ M.make_filelink = function(opts)
   builtin.find_files({
     prompt_title = fopts.prompt_title,
     cwd = fopts.working_dir or fopts.working_dir,
-    -- find_command = fopts.find_command,
     attach_mappings = function(prompt_bufnr, _)
       actions.select_default:replace(function()
         actions.close(prompt_bufnr)
