@@ -17,15 +17,7 @@ local defaults = {
 local M = {}
 
 M.setup = function(opts)
-  -- cwd not working_dir because telescope's finders.new_oneshot_job
-  -- logic needs the cwd field.
-  defaults.working_dir = opts.working_dir or defaults.working_dir
-  defaults.first_upper = opts.first_upper or defaults.first_upper
-  defaults.format_string = opts.format_string or defaults.format_string
-  defaults.format_string_append = opts.format_string_append or defaults.format_string_append
-  defaults.prompt_title = opts.prompt_title or defaults.prompt_title
-  defaults.remove_extension = opts.remove_extension or defaults.remove_extension
-  defaults.url_first = opts.url_first or defaults.url_first
+  for k, v in pairs(opts) do defaults[k] = v end
 end
 
 M.make_filelink = function(opts)
