@@ -8,6 +8,7 @@ local defaults = {
   first_upper = true,
   format_string = "[%s](%s)",
   format_string_append = " ", -- append space for better typography and continuous typing
+  prepend_to_link = "",
   prompt_title = "File Finder",
   remove_extension = true,
   url_first = false,
@@ -56,11 +57,13 @@ M.make_filelink = function(opts)
         end
         -- Put <file_name> & <selected_page> at current position (=nvim_put)
         local format_string = fopts.format_string .. fopts.format_string_append
+        local link = fopts.prepend_to_link .. selected_page[1]
         -- Some link schemes like Wiki, Orgmode or AsciiDoc expect the URL to come first
         if fopts.url_first then
           vim.api.nvim_put({ string.format(format_string, selected_page[1], file_name) }, "", false, true)
         else -- Description first
-          vim.api.nvim_put({ string.format(format_string, file_name, selected_page[1]) }, "", false, true)
+          -- vim.api.nvim_put({ string.format(format_string, file_name, selected_page[1]) }, "", false, true)
+          vim.api.nvim_put({ string.format(format_string, file_name, link) }, "", false, true)
         end
       end)
       return true
