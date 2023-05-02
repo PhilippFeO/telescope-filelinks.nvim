@@ -42,6 +42,8 @@ The following options (with their defaults) are currently available:
 -- The working directory to search for files.
 -- Set to your wiki directory to create links (further examples below)
 working_dir = vim.fn.getcwd(),
+-- specify your own find_command according to telescope's find_command syntax, f. i. { "rg", "--files", "--color", "never" }. Default is nil because telescope's find_files function has it's own default/fall back find_command logic.
+find_command = nil,
 -- First letter in display name upper or lower case, i.e. `[Plugins](…)`
 -- or `[plugins](…)`
 first_upper = true,

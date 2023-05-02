@@ -37,6 +37,8 @@ M.make_filelink = function(opts)
     fopts = defaults
   end
   builtin.find_files({
+    -- not needed in defaults because builtin.find_files handles empty/nil find_command option on its own
+    find_command = fopts.find_command,
     prompt_title = fopts.prompt_title,
     -- cwd not working_dir because telescope's finders.new_oneshot_job
     -- logic needs the cwd field.
