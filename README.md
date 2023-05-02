@@ -37,7 +37,7 @@ vim.keymap.set('n', '<Leader>ml', filelinks.make_filelink, { desc = '[m]ake file
 ```
 
 ### Options
-The following options (with their defaults) are currently availabe:
+The following options (with their defaults) are currently available:
 ```lua
 -- The working directory to search for files.
 -- Set to your wiki directory to create links (further examples below)
