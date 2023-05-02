@@ -53,6 +53,8 @@ first_upper = true,
 format_string = '[%s](%s)', 
 -- Append space to format_string for better typography and continuous typing
 format_string_append = " ",
+-- Prepend a string to the link/URL/URI, f.i. "file:///home/NAME/DIR/" or "~/"
+prepend_to_link = "",
 -- Title for the telescope prompt
 prompt_title = 'File Finder',
 -- Display file links with or without extension, f. i. `[Plugins](…)`
