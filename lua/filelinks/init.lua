@@ -17,6 +17,7 @@ local defaults = {
 local M = {}
 
 M.setup = function(opts)
+  -- merge setup values into defualts list
   for k, v in pairs(opts) do defaults[k] = v end
 end
 
