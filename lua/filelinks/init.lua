@@ -60,9 +60,8 @@ M.make_filelink = function(opts)
         local link = fopts.prepend_to_link .. selected_page[1]
         -- Some link schemes like Wiki, Orgmode or AsciiDoc expect the URL to come first
         if fopts.url_first then
-          vim.api.nvim_put({ string.format(format_string, selected_page[1], file_name) }, "", false, true)
+          vim.api.nvim_put({ string.format(format_string, link, file_name) }, "", false, true)
         else -- Description first
-          -- vim.api.nvim_put({ string.format(format_string, file_name, selected_page[1]) }, "", false, true)
           vim.api.nvim_put({ string.format(format_string, file_name, link) }, "", false, true)
         end
       end)
