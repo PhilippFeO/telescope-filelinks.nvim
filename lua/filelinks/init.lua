@@ -19,31 +19,19 @@ local M = {}
 
 M.setup = function(opts)
   -- merge setup values into defualts list
-  for k, v in pairs(opts) do defaults[k] = v end
+  defaults = vim.tbl_extend('force', defaults, opts)
 end
 
 M.make_filelink = function(opts)
   -- make_filelink can receive all default values but also a subset.
-  local fopts = {} -- fopts = function opts
-  if opts then
-    -- To work properly in the subset case, the missing default values have to be added..
-    -- You can't just overwrite the defaults because users might set them explicitly and rely on them.
-    for k, v in pairs(defaults) do
-      fopts[k] = v
-    end
-    -- ..i. e. overwritten by opts
-    for k, v in pairs(opts) do fopts[k] = v end
-  else
-    -- make_filelink was called without any argument, i. e. opts = nil
-    fopts = defaults
-  end
+  opts = vim.tbl_extend('keep', opts, defaults)
   builtin.find_files({
     -- not needed in defaults because builtin.find_files handles empty/nil find_command option on its own
-    find_command = fopts.find_command,
-    prompt_title = fopts.prompt_title,
+    find_command = opts.find_command,
+    prompt_title = opts.prompt_title,
     -- cwd not working_dir because telescope's finders.new_oneshot_job
     -- logic needs the cwd field.
-    cwd = fopts.working_dir,
+    cwd = opts.working_dir,
     attach_mappings = function(prompt_bufnr, _)
       actions.select_default:replace(function()
         actions.close(prompt_bufnr)
@@ -51,7 +39,7 @@ M.make_filelink = function(opts)
         -- Extract file name via removing everthing before last /
         local file_name = selected_page[1]:gsub(".*/", "")
         -- remove file extension
-        if fopts.remove_extension then
+        if opts.remove_extension then
           file_name = file_name:gsub("%..*", "")
         end
         -- convert first letter to uppercase for proper readability
@@ -59,10 +47,10 @@ M.make_filelink = function(opts)
         --   file_name = file_name:gsub("^%l", string.upper)
         -- end
         -- Put <file_name> & <selected_page> at current position (=nvim_put)
-        local format_string = fopts.format_string .. fopts.format_string_append
-        local link = fopts.prepend_to_link .. selected_page[1]
+        local format_string = opts.format_string .. opts.format_string_append
+        local link = opts.prepend_to_link .. selected_page[1]
         -- Some link schemes like Wiki, Orgmode or AsciiDoc expect the URL to come first
-        if fopts.url_first then
+        if opts.url_first then
           vim.api.nvim_put({ string.format(format_string, link, file_name) }, "", false, true)
         else -- Description first
           vim.api.nvim_put({ string.format(format_string, file_name, link) }, "", false, true)
