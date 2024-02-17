@@ -5,7 +5,7 @@ local action_state = require "telescope.actions.state"
 -- Dafault values
 local defaults = {
   -- find_command = { "rg", "--files", "--color", "never" },
-  first_upper = true,
+  first_upper = false,
   format_string = "[%s](%s)",
   format_string_append = " ", -- append space for better typography and continuous typing
   prepend_to_link = "",
@@ -43,9 +43,9 @@ M.make_filelink = function(opts)
           file_name = file_name:gsub("%..*", "")
         end
         -- convert first letter to uppercase for proper readability
-        -- if fopts.first_upper then
-        --   file_name = file_name:gsub("^%l", string.upper)
-        -- end
+        if opts.first_upper then
+          file_name = file_name:gsub("^%l", string.upper)
+        end
         -- Put <file_name> & <selected_page> at current position (=nvim_put)
         local format_string = opts.format_string .. opts.format_string_append
         local link = opts.prepend_to_link .. selected_page[1]
