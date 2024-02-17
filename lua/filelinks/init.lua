@@ -52,9 +52,9 @@ M.make_filelink = function(opts)
           file_name = file_name:gsub("%..*", "")
         end
         -- convert first letter to uppercase for proper readability
-        if fopts.first_upper then
-          file_name = file_name:gsub("^%l", string.upper)
-        end
+        -- if fopts.first_upper then
+        --   file_name = file_name:gsub("^%l", string.upper)
+        -- end
         -- Put <file_name> & <selected_page> at current position (=nvim_put)
         local format_string = fopts.format_string .. fopts.format_string_append
         local link = fopts.prepend_to_link .. selected_page[1]
